@@ -1,0 +1,33 @@
+﻿@*<script src="https://www.paypal.com/sdk/js?client-id=AR2v4pQhooDIEobHY0aUO5ZW8ayTVGtOIyaafw0SXQVyUPSKLTlWNPwi9aajK-2sYO8kbiezfa6t963V&merchant-id=A46RQJ6NJ3TSY&currency=USD&intent=capture" data-partner-attribution-id="BN-Code"></script>
+
+    <div id="paypal-button-container"></div>
+
+    <script>
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return fetch('/Home/createorder', {
+            method: 'POST'
+          }).then(function(res) {
+            return res.json();
+          }).then(function(data) {
+            return data.id;
+          });
+        },
+        onApprove: function(data, actions) {
+            return fetch('/Home/createorder' + data.orderID, {
+            method: 'POST'
+          }).then(function(res){
+            if (!res.ok) {
+              alert('Something went wrong');
+            }
+          });
+        }
+      }).render('#paypal-button-container');
+    </script>*@
+<form method="post" action="~/Home/Login">
+    <input type="text" name="UserName" />
+    <input type="text" name="Password" />
+    <input type="submit" />
+</form>
+<iframe id="bigmarker_embed_conference_room" src="https://www.bigmarker.com/conferences/a8debbdfe600/attend_check?iframe=true&webcast=true"
+        width="720" height="402" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
